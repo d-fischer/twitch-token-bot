@@ -21,7 +21,7 @@ jobs:
       env:
         SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
     - name: Build the Docker image
-      run: docker build . --file prod.Dockerfile --tag twinv
+      run: docker build . --file ./prod.Dockerfile --tag twinv
     - name: Clean up container
       run: (docker stop twinv && docker container rm twinv) || true
     - name: Start container
