@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  bot:
+    build: .
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 9229:9229
+    env_file:
+      - .env
+    container_name: twinv
+    hostname: twinv

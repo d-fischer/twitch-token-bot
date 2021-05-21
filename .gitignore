@@ -1,0 +1,4 @@
+/.idea
+/docker-prod
+/node_modules
+/.env

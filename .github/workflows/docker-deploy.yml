@@ -1,0 +1,28 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    env:
+      DOCKER_HOST: ssh://target
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Decrypt secrets
+      run: ./decryptSecrets.sh
+      env:
+        SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
+    - name: Build the Docker image
+      run: docker build . --file prod.Dockerfile --tag twinv
+    - name: Clean up container
+      run: (docker stop twinv && docker container rm twinv) || true
+    - name: Start container
+      run: docker run -d --env-file=.env --name twinv --hostname twinv twinv
