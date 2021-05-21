@@ -45,7 +45,7 @@ client.on('message', async msg => {
 					description: '⌛ Downloading attachment(s)...'
 				});
 				const reply = await msg.reply(embed);
-				const tokens = (await Promise.all(contentPromises)).flat().filter(tk => tk && tokenRE.test(tk));
+				const tokens = (await Promise.all(contentPromises)).flatMap(content => content.split('\n')).filter(tk => tk && tokenRE.test(tk));
 				const amount = tokens.length;
 				embed.setDescription(`⌛ ${amount} tokens found, purging... (${amount} left)`);
 				await reply.edit(embed);
