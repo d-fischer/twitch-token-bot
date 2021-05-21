@@ -1,4 +1,5 @@
 /.idea
-/docker-prod
+/docker-prod/*
+!/docker-prod/Dockerfile
 /node_modules
 /.env
